@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: ad663356d6a8011e993b40ad7da85cdb-706532320.us-east-1.elb.amazonaws.com
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /spring
+        backend:
+          serviceName: spring-boot
+          servicePort: 8080
