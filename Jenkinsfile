@@ -11,7 +11,6 @@ node('master'){
 		sh 'export AWS_EKS_CLUSTER_NAME=cma-cluster';
 		sh 'export KUBERNETES_DEPLOYMENT_NAME=spring-boot-deployment';
 
-		# configure aws
 		sh 'sudo aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID';
 		sh 'sudo aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY';
 		sh 'sudo aws configure set default.region $AWS_REGION'
@@ -25,7 +24,6 @@ node('master'){
 		sh 'sudo docker push $AWS_IMAGE_NAME';
 	}
 	stage("Deploy into EKS") {
-		# make rolling update into kubernetes
 		sh 'kubectl --record deployment.v1.apps/$KUBERNETES_DEPLOYMENT_NAME set image deployment.v1.apps/$KUBERNETES_DEPLOYMENT_NAME spring-boot=$AWS_IMAGE_NAME';
 		sh 'kubectl rollout status deployment.v1.apps/$KUBERNETES_DEPLOYMENT_NAME'
 	}
