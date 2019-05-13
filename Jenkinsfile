@@ -3,13 +3,10 @@ node('master') {
 		checkout scm
 	}
 	stage('Maven & Docker build') {
-		sh 'export NAME=Gourav Paul'
-		sh 'echo $NAME'
 		sh 'mvn package'
 		sh 'sudo docker build -f $DOCKERFILE_PATH -t $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER .'
 	}
 	stage("Publish to AWS ECR") {
-		sh 'echo $NAME'
 		sh 'eval sudo "$(aws ecr get-login --no-include-email --region us-east-1)"'
 		sh 'sudo docker push $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER'
 	}
