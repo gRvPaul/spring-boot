@@ -20,12 +20,8 @@ node('master'){
 		sh 'sudo docker build -f src/main/docker/Dockerfile -t 063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER .'
 	}
 	stage("Publish to AWS ECR") {
-		withAWS(credentials:'aws_creds') {
-			sh 'sudo aws configure set aws_access_key_id AKIAQ5P4KD6CXV32YPPL';
-			sh 'sudo aws configure set aws_secret_access_key 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';
-			sh 'sudo aws configure set default.region us-east-1';
-			sh 'eval sudo "$(aws ecr get-login --no-include-email --region us-east-1)"';
-			sh 'sudo docker push 063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER'
+		docker.withRegistry("https://063343042437.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:aws_creds") {
+  			docker.image("cma-demo-ecr:$BUILD_NUMBER").push()
 		}
 	}
 	stage("Deploy into EKS") {
