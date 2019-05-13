@@ -11,9 +11,9 @@ node('master'){
 		sh 'export AWS_EKS_CLUSTER_NAME=cma-cluster';
 		sh 'export KUBERNETES_DEPLOYMENT_NAME=spring-boot-deployment';
 
-		sh 'sudo aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID';
-		sh 'sudo aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY';
-		sh 'sudo aws configure set default.region $AWS_REGION'
+		sh 'sudo aws configure set aws_access_key_id AKIAQ5P4KD6CXV32YPPL';
+		sh 'sudo aws configure set aws_secret_access_key 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';
+		sh 'sudo aws configure set default.region us-east-1'
 	}
 	stage('build'){
 		sh 'mvn package';
