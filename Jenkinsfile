@@ -27,7 +27,6 @@ node('master'){
 		sh 'sudo docker push 063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER'
 	}
 	stage("Deploy into EKS") {
-		# make rolling update into kubernetes
 		sh 'kubectl --record deployment.v1.apps/spring-boot-deployment set image deployment.v1.apps/spring-boot-deployment spring-boot=063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER';
 		sh 'kubectl rollout status deployment.v1.apps/spring-boot-deployment'
 	}
