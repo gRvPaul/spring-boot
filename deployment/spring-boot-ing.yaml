@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: spring-boot-ing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: cma.com
+    http:
+      paths:
+      - path: /spring-docker/hello
+        backend:
+          serviceName: spring-boot
+          servicePort: 8080
