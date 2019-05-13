@@ -20,7 +20,7 @@ node('master'){
 		sh 'sudo docker build -f src/main/docker/Dockerfile -t 063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER .'
 	}
 	stage("Publish to AWS ECR") {
-		docker.withRegistry("https://063343042437.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:063343042437") {
+		docker.withRegistry("https://063343042437.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:AKIAQ5P4KD6CXV32YPPL") {
   			docker.image("cma-demo-ecr:$BUILD_NUMBER").push()
 		}
 	}
