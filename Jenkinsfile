@@ -17,7 +17,7 @@ node('master'){
 	}
 	stage('build'){
 		sh 'mvn package';
-		sh 'sudo docker build -f src/main/docker/Dockerfile -t 063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER .'
+		sh 'sudo docker build -f $DOCKERFILE_PATH -t 063343042437.dkr.ecr.us-east-1.amazonaws.com/cma-demo-ecr:$BUILD_NUMBER .'
 	}
 	stage("Publish to AWS ECR") {
 		sh 'sudo aws configure set aws_access_key_id AKIAQ5P4KD6CXV32YPPL'
