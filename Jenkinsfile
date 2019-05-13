@@ -1,8 +1,7 @@
 node('master') {
-	stages {
-		stage('checkout') {
-			checkout scm
-		}
+	stage('checkout') {
+		checkout scm
+	}
 	stage('Maven & Docker build') {
 		sh 'mvn package'
 		sh 'sudo docker build -f $DOCKERFILE_PATH -t $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER .'
