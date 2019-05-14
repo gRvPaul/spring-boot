@@ -11,7 +11,7 @@ node('master') {
 		sh 'sudo docker push $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER'
 	}
 	stage("Deploy into EKS") {
-		sh 'export PATH=/var/lib/jenkins/bin/aws-iam-authenticator && export PATH=/var/lib/jenkins/bin/kubectl && kubectl --record deployment.v1.apps/$KUBE_DEPLOYMENT_NAME set image deployment.v1.apps/$KUBE_DEPLOYMENT_NAME $CONTAINER_NAME=$AWS_ECR_REGISTRY_URI:$BUILD_NUMBER';
+		sh 'pwd && export PATH=/var/lib/jenkins/bin/aws-iam-authenticator && export PATH=/var/lib/jenkins/bin/kubectl && kubectl --record deployment.v1.apps/$KUBE_DEPLOYMENT_NAME set image deployment.v1.apps/$KUBE_DEPLOYMENT_NAME $CONTAINER_NAME=$AWS_ECR_REGISTRY_URI:$BUILD_NUMBER';
 		sh 'kubectl rollout status deployment.v1.apps/$KUBE_DEPLOYMENT_NAME'
 	}
 }
