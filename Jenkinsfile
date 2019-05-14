@@ -41,7 +41,7 @@ node('master') {
 			aws eks --region us-east-1 update-kubeconfig --name cma-cluster
 			
 			# make rolling update into kubernetes
-			sudo aws configure set default.region us-east-1
+			aws configure set default.region us-east-1
 			kubectl --record deployment.v1.apps/$KUBE_DEPLOYMENT_NAME set image deployment.v1.apps/$KUBE_DEPLOYMENT_NAME $CONTAINER_NAME=$AWS_ECR_REGISTRY_URI:$BUILD_NUMBER
 			kubectl rollout status deployment.v1.apps/$KUBE_DEPLOYMENT_NAME
 		'''
