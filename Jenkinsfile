@@ -38,7 +38,7 @@ node('master') {
 			export PATH=$HOME/bin:$PATH
 
 			# update kube config
-			aws eks --region $AWS_REGION update-kubeconfig --name cma-cluster
+			aws eks --region us-east-1 update-kubeconfig --name cma-cluster
 			
 			# make rolling update into kubernetes
 			kubectl --record deployment.v1.apps/$KUBE_DEPLOYMENT_NAME set image deployment.v1.apps/$KUBE_DEPLOYMENT_NAME $CONTAINER_NAME=$AWS_ECR_REGISTRY_URI:$BUILD_NUMBER
