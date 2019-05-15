@@ -8,7 +8,7 @@ node('master') {
 	stage('Create Dockerfile from template') {
 		sh '''
 			export PATH=$PATH:/home/cmauser/cma-eks-cluster/docker-template/node_modules/.bin
-			dockerfile-template -f src/main/docker/Dockerfile.template -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > src/main/docker/Dockerfile'
+			dockerfile-template -f src/main/docker/Dockerfile.template -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > src/main/docker/Dockerfile
 		'''
 	}
 	stage('Make Docker build') {
