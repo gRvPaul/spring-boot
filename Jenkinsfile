@@ -8,7 +8,7 @@ node('master') {
 	stage('Create Dockerfile from template') {
 		sh '''
 			export PATH=$PATH:/home/cmauser/cma-eks-cluster/docker-template/node_modules/.bin
-			source docker/dockerfile-template.selector
+			. docker/dockerfile-template.selector
 			touch docker/Dockerfile
 			if [ $app_type == springboot_basic ]
 			then
