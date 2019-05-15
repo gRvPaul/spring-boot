@@ -6,7 +6,10 @@ node('master') {
 		sh 'mvn package'
 	}
 	stage('Create Dockerfile from template') {
-		sh 'dockerfile-template -f src/main/docker/Dockerfile.template -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > src/main/docker/Dockerfile'
+		sh '''
+			export PATH=$PATH:/home/cmauser/cma-eks-cluster/docker-template/node_modules/.bin
+			dockerfile-template -f src/main/docker/Dockerfile.template -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > src/main/docker/Dockerfile'
+		'''
 	}
 	stage('Make Docker build') {
 		sh 'sudo docker build -f $DOCKERFILE_PATH -t $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER .'
