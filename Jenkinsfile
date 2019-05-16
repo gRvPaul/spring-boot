@@ -9,6 +9,7 @@ node('master') {
 		sh '''
 			export PATH=$PATH:/home/cmauser/cma-eks-cluster/docker-template/node_modules/.bin
 			. docker/dockerfile-template.selector
+			echo $app_type
 			rm -rf $DOCKERFILE_PATH
 			touch $DOCKERFILE_PATH
 			if [ $app_type == "springboot_basic" ]
