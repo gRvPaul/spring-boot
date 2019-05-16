@@ -57,7 +57,7 @@ node('master') {
 			export PATH=$HOME/bin:$PATH
 
 			# update kube config
-			aws eks --region us-east-1 update-kubeconfig --name cma-cluster
+			aws eks --region us-east-1 update-kubeconfig --name $CLUSTER_NAME
 			
 			# make rolling update into kubernetes
 			aws configure set default.region us-east-1
