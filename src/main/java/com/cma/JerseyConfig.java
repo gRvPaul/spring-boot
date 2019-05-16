@@ -1,9 +1,9 @@
-package com.unw;
+package com.cma;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
-import com.unw.service.HelloWorldService;
+import com.cma.service.HelloWorldService;
 
 /**
  * @author UNGERW
