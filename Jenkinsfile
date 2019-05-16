@@ -15,7 +15,7 @@ node('master') {
 				dockerfile-template -f /home/cmauser/docker-templates/Dockerfile.template_springboot_basic -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > docker/Dockerfile
 			elif [$app_type == springboot_javaopts ]
 			then
-				dockerfile-template -f /home/cmauser/docker-templates/Dockerfile.template_springboot_java_opts -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > docker/Dockerfile
+				dockerfile-template -f /home/cmauser/docker-templates/Dockerfile.template_springboot_javaopts -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > docker/Dockerfile
 			fi
 			cat docker/Dockerfile
 		'''
