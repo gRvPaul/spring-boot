@@ -1,5 +1,5 @@
 node('master') {
-	stage('checkout') {
+	stage('Checkout code') {
 		checkout scm
 	}
 	stage('Make Maven build') {
@@ -9,25 +9,25 @@ node('master') {
 		sh '''
 			export PATH=$PATH:/home/cmauser/cma-eks-cluster/docker-template/node_modules/.bin
 			. docker/dockerfile-template.selector
-			touch docker/Dockerfile
+			touch $DOCKERFILE_PATH
 			if [ $app_type == springboot_basic ]
 			then
-				dockerfile-template -f /home/cmauser/docker-templates/Dockerfile.template_springboot_basic -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > docker/Dockerfile
+				dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_springboot_basic -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > $DOCKERFILE_PATH
 			elif [ $app_type == springboot_javaopts ]
 			then
-				dockerfile-template -f /home/cmauser/docker-templates/Dockerfile.template_springboot_javaopts -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > docker/Dockerfile
+				dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_springboot_javaopts -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > $DOCKERFILE_PATH
 			fi
-			cat docker/Dockerfile
+			cat $DOCKERFILE_PATH
 		'''
 	}
 	stage('Make Docker build') {
 		sh 'sudo docker build -f $DOCKERFILE_PATH -t $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER .'
 	}
-	stage("Publish to AWS ECR") {
+	stage("Publish Docker image to AWS ECR") {
 		sh 'eval sudo "$(aws ecr get-login --no-include-email --region us-east-1)"'
 		sh 'sudo docker push $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER'
 	}
-	stage("Deploy into EKS") {
+	stage("Deploy into AWS EKS") {
 		sh '''
 			# create home bin directory if not exists
 			mkdir -p $HOME/bin
