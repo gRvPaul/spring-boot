@@ -33,10 +33,10 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
-    @Override
-    public Product getById(Long id) {
-        return productRepository.findOne(id);
-    }
+//@Override
+//   public Product getById(Long id) {
+//       return productRepository.findOne(id);
+//   }
 
     @Override
     public Product saveOrUpdate(Product product) {
@@ -44,11 +44,11 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-    @Override
-    public void delete(Long id) {
-        productRepository.delete(id);
+//    @Override
+//    public void delete(Long id) {
+//        productRepository.delete(id);
 
-    }
+//    }
 
     @Override
     public Product saveOrUpdateProductForm(ProductForm productForm) {

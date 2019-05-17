@@ -1,4 +1,4 @@
-package com.cma;
+package com.cma.commands;
 
 
 import java.math.BigDecimal;

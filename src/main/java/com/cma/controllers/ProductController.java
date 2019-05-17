@@ -44,20 +44,20 @@ public class ProductController {
         return "product/list";
     }
 
-    @RequestMapping("/product/show/{id}")
-    public String getProduct(@PathVariable String id, Model model){
-        model.addAttribute("product", productService.getById(Long.valueOf(id)));
-        return "product/show";
-    }
+//    @RequestMapping("/product/show/{id}")
+//    public String getProduct(@PathVariable String id, Model model){
+//        model.addAttribute("product", productService.getById(Long.valueOf(id)));
+//        return "product/show";
+//    }
 
-    @RequestMapping("product/edit/{id}")
-    public String edit(@PathVariable String id, Model model){
-        Product product = productService.getById(Long.valueOf(id));
-        ProductForm productForm = productToProductForm.convert(product);
-
-        model.addAttribute("productForm", productForm);
-        return "product/productform";
-    }
+//    @RequestMapping("product/edit/{id}")
+//    public String edit(@PathVariable String id, Model model){
+//        Product product = productService.getById(Long.valueOf(id));
+//        ProductForm productForm = productToProductForm.convert(product);
+//
+//        model.addAttribute("productForm", productForm);
+//        return "product/productform";
+//    }
 
     @RequestMapping("/product/new")
     public String newProduct(Model model){
@@ -77,9 +77,9 @@ public class ProductController {
         return "redirect:/product/show/" + savedProduct.getId();
     }
 
-    @RequestMapping("/product/delete/{id}")
-    public String delete(@PathVariable String id){
-        productService.delete(Long.valueOf(id));
-        return "redirect:/product/list";
-    }
+//    @RequestMapping("/product/delete/{id}")
+//    public String delete(@PathVariable String id){
+//        productService.delete(Long.valueOf(id));
+//        return "redirect:/product/list";
+//    }
 }
