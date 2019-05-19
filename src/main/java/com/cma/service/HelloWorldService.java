@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import com.cma.bean.CustomerBean;
+import com.cma.model.Customer;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author UNGERW
+ * @author Gourav
  */
 
-@Component
-@Path("/customer")
-//@RestController
-//@RequestMapping(value = "/customer")
+@RestController
+@RequestMapping(value = "/customer")
 public class HelloWorldService {
 
 	private CustomerBean customerBean;
@@ -35,31 +34,26 @@ public class HelloWorldService {
 		this.customerBean = customerBean;
 	}
 
-
-	@GET
-	@Path("/save")
-	public Response saveCustomer() {
-		this.customerBean.saveCustomer(null, null);
+	@RequestMapping(value = "/save", method = RequestMethod.GET)
+	public Response saveCustomer(@Valid @RequestParam(value = "name", required = true) final String name, 
+		@Valid @RequestParam(value = "email", required = true) final String email) {
+		this.customerBean.saveCustomer(name, email);
 	
 		return Response.status(200).entity("Customer saved !!").build();
 	}
-/*
-	//@GET
-	//@Path("/name")
-	public Response getUserNameByEmail(@RequestParam(value = "email", required = true) String email) {
-		email = "paul.gourav@tcs.com";
-		List<Customer> customers = this.customerRepository.findByEmail(email);
-		if (customers.size() > 0) {
-			return Response.status(200).entity("For email : " + email + " User name : " + customers.get(0).getName()).build();
+
+	@RequestMapping(value = "/name", method = RequestMethod.GET)
+	public Response getUserNameByEmail(@RequestParam(value = "email", required = true) final String email) {
+		Customer customer = this.customerBean.getCustomerByEmail(email);
+		
+		if (customer != null) {
+			return Response.status(200).entity("Customer name : " + customer.getName()).build();
 		} else {
-			return Response.status(200).entity("For email " + email + "No user found !!").build();
+			return Response.status(200).entity("No user found !!").build();
 		}
 	}
 
-*/
-	@GET
-	@Path("/checkapi")
-	//@RequestMapping(value = "/checkapi", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkapi", method = RequestMethod.GET)
 	public Response test() {
 		return Response.status(200).entity("Western Union Page , - welcome Date: 09.05.2019").build();
 	}

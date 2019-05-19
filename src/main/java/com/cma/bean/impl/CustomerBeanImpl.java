@@ -21,8 +21,8 @@ public class CustomerBeanImpl implements CustomerBean {
 	@Override
 	public void saveCustomer(final String name, final String email) {
 		Customer customer = new Customer();
-		customer.setName("Naveen Kumar");
-		customer.setEmail("kumar.naveen@tcs.com");
+		customer.setName(name);
+		customer.setEmail(email);
 		customer.setDate(new Date());
 
 		this.customerRepository.save(customer);
@@ -30,7 +30,15 @@ public class CustomerBeanImpl implements CustomerBean {
 
 	@Override
 	public Customer getCustomerByEmail(final String email) {
-		return null;
+		/*List<Customer> customers = this.customerRepository.findByEmail(email);
+		
+		if (customers.size() == 0) {
+			return null;
+		} else {
+			return customers.get(0);
+		}*/
+		Customer customer = this.customerRepository.findByEmail(email);
+		return customer;
 	}
 }
 
