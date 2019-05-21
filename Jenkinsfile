@@ -14,10 +14,10 @@ node('master') {
 			. docker/dockerfile-template.selector
 			if [ $APP_TYPE = "springboot_basic" ]
 			then
-				dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_springboot_basic -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > $DOCKERFILE_PATH
+				dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_$APP_TYPE -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar > $DOCKERFILE_PATH
 			elif [ $APP_TYPE = "springboot_advanced" ]
 			then
-				dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_springboot_advanced -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > $DOCKERFILE_PATH
+				dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_$APP_TYPE -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > $DOCKERFILE_PATH
 			fi
 			cat $DOCKERFILE_PATH
 		'''
