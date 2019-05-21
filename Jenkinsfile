@@ -11,7 +11,7 @@ node('master') {
 			echo $app_type
 			rm -rf $DOCKERFILE_PATH
 			touch $DOCKERFILE_PATH
-			eval "$(python $DOCKER_TEMPLATE_PATH/docker-template-command-generator.py $WORKSPACE/config.json)"
+			eval "$(python $DOCKER_TEMPLATE_PATH/docker-template-command-generator.py $WORKSPACE/docker/config.json)"
 			cat $DOCKERFILE_PATH
 		'''
 	}
