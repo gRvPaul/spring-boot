@@ -11,8 +11,7 @@ node('master') {
 			echo $app_type
 			rm -rf $DOCKERFILE_PATH
 			touch $DOCKERFILE_PATH
-			. docker/dockerfile-template.selector
-			dockerfile-template -f $DOCKER_TEMPLATE_PATH/Dockerfile.template_$APP_TYPE -d BASE=java -d TAG=8 -d PORT=8080 -d PROJECT_OUTPUT=target/spring-boot.jar -d JAVA_OPTS=-Xmx1024m > $DOCKERFILE_PATH
+			eval "$(python $DOCKER_TEMPLATE_PATH/docker-template-command-generator.py $WORKSPACE/config.json)"
 			cat $DOCKERFILE_PATH
 		'''
 	}
