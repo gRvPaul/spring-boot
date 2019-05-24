@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +22,10 @@ import java.util.List;
 
 @SpringBootApplication
 @Configuration
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @ComponentScan
-@EnableJpaRepositories(basePackages = "com.cma.dao")
-@PropertySource("classpath:/application.properties")
+//@EnableJpaRepositories(basePackages = "com.cma.dao")
+//@PropertySource("classpath:/application.properties")
 public class Application {
 
     public static void main(String[] args) throws Exception {

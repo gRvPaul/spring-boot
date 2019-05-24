@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Date;
 import javax.validation.Valid;
 
-import com.cma.bean.CustomerBean;
-import com.cma.model.Customer;
+//import com.cma.bean.CustomerBean;
+//import com.cma.model.Customer;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,13 +27,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/customer")
 public class HelloWorldService {
 
-	private CustomerBean customerBean;
+//	private CustomerBean customerBean;
 
     	@Inject
-	public  HelloWorldService(final CustomerBean customerBean) {
-		this.customerBean = customerBean;
+	public  HelloWorldService() {
+//		this.customerBean = customerBean;
 	}
-
+/*
 	@RequestMapping(value = "/save", method = RequestMethod.GET)
 	public Response saveCustomer(@Valid @RequestParam(value = "name", required = true) final String name, 
 		@Valid @RequestParam(value = "email", required = true) final String email) {
@@ -52,7 +52,7 @@ public class HelloWorldService {
 			return Response.status(200).entity("No user found !!").build();
 		}
 	}
-
+*/
 	@RequestMapping(value = "/checkapi", method = RequestMethod.GET)
 	public Response test() {
 		return Response.status(200).entity("Western Union Page , - welcome Date: " + new Date()).build();
