@@ -55,7 +55,7 @@ public class HelloWorldService {
 
 	@RequestMapping(value = "/checkapi", method = RequestMethod.GET)
 	public Response test() {
-		return Response.status(200).entity("Western Union Page , - welcome Date: " + new Date()).build();
+		return Response.status(200).entity("Demo project Page , - welcome Date: " + new Date()).build();
 	}
 }
 
