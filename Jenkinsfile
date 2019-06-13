@@ -19,7 +19,7 @@ node('master') {
 		sh 'sudo docker build -f $DOCKERFILE_PATH -t $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER .'
 	}
 	stage("Publish Docker image to AWS ECR") {
-		sh 'eval sudo "$(aws ecr get-login --no-include-email --region us-east-2)"'
+		sh 'eval sudo "$(aws ecr get-login --no-include-email --region us-west-2)"'
 		sh 'sudo docker push $AWS_ECR_REGISTRY_URI:$BUILD_NUMBER'
 	}
 	stage("Deploy into AWS EKS") {
@@ -50,10 +50,10 @@ node('master') {
 			export PATH=$HOME/bin:$PATH
 
 			# update kube config
-			aws eks --region us-east-2 update-kubeconfig --name $CLUSTER_NAME
+			aws eks --region us-west-2 update-kubeconfig --name $CLUSTER_NAME
 			
 			# make rolling update into kubernetes
-			aws configure set default.region us-east-2
+			aws configure set default.region us-west-2
 			kubectl --record deployment.v1.apps/$KUBE_DEPLOYMENT_NAME set image deployment.v1.apps/$KUBE_DEPLOYMENT_NAME $CONTAINER_NAME=$AWS_ECR_REGISTRY_URI:$BUILD_NUMBER
 			kubectl rollout status deployment.v1.apps/$KUBE_DEPLOYMENT_NAME
 		'''
